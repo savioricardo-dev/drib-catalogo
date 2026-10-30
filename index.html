@@ -1,0 +1,570 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Drib Camisas">
+<meta property="og:description" content="Camisas de time. Escolha a camisa, o tamanho e fale com a gente no WhatsApp.">
+<meta property="og:image" content="img/apple-touch-icon.png">
+<meta property="og:locale" content="pt_BR">
+<title>Drib Camisas</title>
+<meta name="description" content="Drib — catálogo de camisas de time. Escolha o tamanho e fale com a gente no WhatsApp.">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="img/favicon-192.png">
+<link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+<meta name="theme-color" content="#0d0b0b">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;800;900&family=Barlow:wght@400;500;600;700&family=Barlow+Condensed:wght@500;600;700&display=swap">
+<style>
+/* Layout: vitrine de loja — faixa preta de marca no topo, grade de camisas, página de produto com galeria à esquerda e compra à direita */
+:root{
+  --bg:#ffffff; --surface:#f4f1f1; --ink:#0d0b0b; --muted:#6b6262; --line:#e2dcdc;
+  --red:#d7141f; --red-ink:#ffffff; --band:#0d0b0b; --band-ink:#ffffff;
+  --red-hi:#ff4752; --band-muted:#d4cbcb; --photo:#f3f3f3;
+  --display:"Big Shoulders Display", "Arial Narrow", Impact, sans-serif;
+  --body:"Barlow", "Helvetica Neue", Arial, sans-serif;
+  --label:"Barlow Condensed", "Arial Narrow", sans-serif;
+  --r:4px;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0d0b0b; --surface:#191515; --ink:#f7f3f3; --muted:#a59a9a; --line:#2c2525;
+  --red:#ee2430; --red-ink:#ffffff; --band:#000000; --band-ink:#ffffff; color-scheme:dark }}
+:root[data-theme="dark"]{
+  --bg:#0d0b0b; --surface:#191515; --ink:#f7f3f3; --muted:#a59a9a; --line:#2c2525;
+  --red:#ee2430; --red-ink:#ffffff; --band:#000000; --band-ink:#ffffff; color-scheme:dark }
+
+*{box-sizing:border-box}
+body{background:var(--bg); color:var(--ink); font-family:var(--body); font-size:16px; line-height:1.5}
+body::before{content:""; position:fixed; inset:0 0 auto; height:env(safe-area-inset-top,0px); z-index:10; background:var(--band)}
+a{color:inherit}
+button{font:inherit; color:inherit}
+:focus-visible{outline:2px solid var(--red); outline-offset:2px}
+.wrap{max-width:1180px; margin:0 auto; padding-left:max(16px, env(safe-area-inset-left,0px)); padding-right:max(16px, env(safe-area-inset-right,0px))}
+.lbl{font-family:var(--label); text-transform:uppercase; letter-spacing:.08em; font-weight:600; font-size:13px}
+
+/* topo */
+header.top{position:sticky; top:env(safe-area-inset-top,0px); z-index:5; background:var(--band); color:var(--band-ink)}
+.top .wrap{display:flex; align-items:center; justify-content:space-between; gap:16px; padding-block:12px}
+.logo{display:flex; align-items:center; gap:10px; text-decoration:none; font-family:var(--display); font-weight:900; font-size:34px; line-height:1; letter-spacing:.02em}
+.logo .crest{height:42px; width:auto; display:block}
+.top nav{display:flex; align-items:center; gap:24px}
+.top nav a{text-decoration:none; opacity:.85; padding-block:6px; border-bottom:2px solid transparent}
+.top nav a:hover{opacity:1; color:var(--red-hi)}
+.top nav a[aria-current="true"]{opacity:1; border-color:var(--red-hi)}
+.top-right{display:flex; align-items:center; gap:24px}
+.zap-top{display:inline-flex; align-items:center; gap:8px; min-height:40px; padding:0 14px; border:1.5px solid rgba(255,255,255,.35); border-radius:999px; text-decoration:none; transition:border-color .15s, background .15s}
+.zap-top:hover{border-color:var(--band-ink); background:rgba(255,255,255,.08)}
+.zap-top svg{width:18px; height:18px; flex:none}
+
+/* faixa de abertura */
+.hero{background:var(--band); color:var(--band-ink); border-bottom:6px solid var(--red)}
+.hero .wrap{padding-block:28px 34px; display:grid; gap:12px}
+.hero h1{margin:0; font-family:var(--display); font-weight:900; text-transform:uppercase; font-size:clamp(40px, 8vw, 92px); line-height:.92; letter-spacing:.01em; text-wrap:balance}
+.hero h1 em{font-style:normal; color:var(--red-hi)}
+.hero p{margin:0; max-width:52ch; color:var(--band-muted)}
+.hero .kicker{color:var(--red-hi)}
+.steps{display:flex; flex-wrap:wrap; gap:8px 22px; margin-top:6px}
+.steps span{display:flex; gap:8px; align-items:center}
+.steps b{display:grid; place-items:center; width:22px; height:22px; border-radius:50%; background:var(--red); color:var(--red-ink); font-family:var(--label); font-size:13px}
+
+/* catálogo */
+.bar{display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:12px; padding-block:28px 16px}
+.bar h2{margin:0; font-family:var(--display); font-weight:800; font-size:32px; text-transform:uppercase}
+.chips{display:flex; flex-wrap:wrap; gap:8px}
+.chip{border:1.5px solid var(--line); background:transparent; border-radius:999px; padding:6px 14px; cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--ink); border-color:var(--ink); color:var(--bg)}
+.chip:hover{border-color:var(--ink)}
+.grid{display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:36px 24px; padding-bottom:64px}
+.card{display:grid; grid-template-columns:minmax(0,1fr); grid-template-rows:auto 1fr; gap:12px; text-decoration:none; min-width:0; border-radius:var(--r)}
+.card:focus-visible{outline-offset:6px}
+.card .ph{position:relative; aspect-ratio:1/1; background:var(--photo); border-radius:var(--r); overflow:hidden; max-width:100%}
+.ph img, .main-ph img, .thumbs img{mix-blend-mode:multiply}
+.card .ph img, .card .ph svg{width:100%; height:100%; object-fit:cover; display:block; transition:transform .4s ease}
+.card:hover .ph img, .card:hover .ph svg{transform:scale(1.04)}
+.card .cta{margin-top:2px; color:var(--muted); font-size:14px; display:flex; align-items:center; gap:6px; transition:color .15s}
+.card .cta svg{width:16px; height:16px; flex:none; transition:transform .2s}
+.card:hover .cta{color:var(--red)}
+.card:hover .cta svg{transform:translateX(3px)}
+.card:hover h3{text-decoration:underline; text-underline-offset:3px; text-decoration-thickness:1px}
+.tag{position:absolute; top:10px; left:10px; background:var(--red); color:var(--red-ink); padding:3px 8px; border-radius:2px}
+.card .meta{display:flex; flex-direction:column; gap:3px}
+.card .meta .price{margin-top:auto; padding-top:4px}
+.card .team{color:var(--muted); white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+.card h3{margin:0; font-size:17px; font-weight:600; line-height:1.3}
+.price{font-family:var(--label); font-weight:700; font-size:18px; letter-spacing:.02em}
+.price.ask{color:var(--muted); font-weight:600; font-size:15px; text-transform:uppercase; letter-spacing:.06em}
+
+/* produto */
+.crumbs{padding-block:20px 8px; color:var(--muted)}
+.crumbs a{text-decoration:none}
+.crumbs a:hover{color:var(--red)}
+.pdp{display:grid; grid-template-columns:minmax(0,1.15fr) minmax(0,1fr); gap:48px; padding-bottom:72px; align-items:start}
+.gallery{display:grid; grid-template-columns:72px minmax(0,1fr); gap:12px; position:sticky; top:calc(env(safe-area-inset-top,0px) + 84px)}
+.thumbs{display:grid; gap:10px; align-content:start}
+.thumbs button{padding:0; border:2px solid transparent; border-radius:var(--r); background:var(--photo); aspect-ratio:1/1; overflow:hidden; cursor:pointer; opacity:.75; transition:opacity .15s, border-color .15s}
+.thumbs button:hover{opacity:1}
+.thumbs button[aria-current="true"]{border-color:var(--red); opacity:1}
+.thumbs img, .thumbs svg{width:100%; height:100%; object-fit:cover; display:block}
+.main-ph{position:relative; aspect-ratio:1/1; background:var(--photo); border-radius:var(--r); overflow:hidden; max-width:100%; touch-action:pan-y}
+.nav-foto{position:absolute; top:50%; transform:translateY(-50%); width:44px; height:44px; border-radius:50%; border:0; background:rgba(13,11,11,.72); color:#fff; display:grid; place-items:center; cursor:pointer; opacity:0; transition:opacity .2s}
+.nav-foto svg{width:20px; height:20px}
+.nav-foto.prev{left:12px} .nav-foto.next{right:12px}
+.main-ph:hover .nav-foto, .nav-foto:focus-visible{opacity:1}
+.count{position:absolute; bottom:12px; left:12px; background:rgba(13,11,11,.72); color:#fff; padding:3px 9px; border-radius:999px; font-size:12px; font-variant-numeric:tabular-nums}
+.main-ph img, .main-ph svg{width:100%; height:100%; object-fit:cover; display:block}
+.note{position:absolute; bottom:10px; right:10px; background:var(--bg); color:var(--muted); padding:3px 8px; border-radius:2px; font-size:12px}
+.info{display:grid; gap:20px; min-width:0}
+.info h1{margin:0; font-family:var(--display); font-weight:800; text-transform:uppercase; font-size:clamp(30px, 3.4vw, 44px); line-height:1; text-wrap:balance}
+.info .head{display:grid; gap:10px}
+.info .kicker{color:var(--red)}
+.info .price{font-size:24px}
+.desc{margin:0; max-width:60ch}
+.specs{display:grid; grid-template-columns:auto 1fr; gap:6px 18px; margin:0; padding:14px 0; border-block:1px solid var(--line)}
+.specs dt{color:var(--muted)}
+.specs dd{margin:0}
+.opt{display:grid; gap:10px}
+.opt-head{display:flex; justify-content:space-between; align-items:baseline; gap:12px}
+.linkbtn{background:none; border:0; padding:0; text-decoration:underline; text-underline-offset:3px; cursor:pointer; color:var(--muted)}
+.linkbtn:hover{color:var(--red)}
+.sizes, .versions{display:flex; flex-wrap:wrap; gap:8px}
+.size{min-width:56px; height:48px; padding:0 14px; border:1.5px solid var(--line); background:var(--bg); border-radius:var(--r); cursor:pointer; font-family:var(--label); font-weight:700; font-size:17px; letter-spacing:.04em}
+.size:hover{border-color:var(--ink)}
+.size[aria-pressed="true"]{background:var(--ink); color:var(--bg); border-color:var(--ink)}
+.size.out{color:var(--muted); background:var(--surface); border-color:var(--surface); text-decoration:line-through; text-decoration-thickness:2px; cursor:not-allowed}
+.size.out:hover{border-color:var(--surface)}
+.tag.off{background:var(--ink); color:var(--bg)}
+.card.sold .ph > :first-child{opacity:.45}
+.size.wide{font-size:15px; text-transform:uppercase}
+.buy{display:flex; align-items:center; justify-content:center; gap:10px; min-height:56px; padding:0 20px; border-radius:var(--r); background:var(--red); color:var(--red-ink); text-decoration:none; font-family:var(--label); font-weight:700; font-size:19px; letter-spacing:.06em; text-transform:uppercase; transition:filter .15s}
+.buy:hover{filter:brightness(1.08)}
+.buy[aria-disabled="true"]{background:var(--surface); color:var(--muted); pointer-events:none}
+.buy svg{width:22px; height:22px}
+.hint{margin:-8px 0 0; color:var(--muted); font-size:14px}
+.trust{display:grid; gap:8px; margin:0; padding:0; list-style:none; font-size:14px; color:var(--muted)}
+.trust li{display:flex; gap:8px; align-items:flex-start}
+.trust svg{width:18px; height:18px; flex:none; color:var(--red); margin-top:1px}
+.preview{background:var(--surface); border-radius:var(--r); padding:12px 14px; font-size:14px; color:var(--muted)}
+.preview b{display:block; margin-bottom:4px; color:var(--ink)}
+
+/* tabela de medidas */
+.guide{border:1px solid var(--line); border-radius:var(--r); padding:14px; display:grid; gap:10px}
+.guide table{width:100%; border-collapse:collapse; font-variant-numeric:tabular-nums}
+.guide th, .guide td{text-align:center; padding:6px 4px; border-bottom:1px solid var(--line)}
+.guide th{font-family:var(--label); text-transform:uppercase; letter-spacing:.06em; font-weight:600; font-size:13px; color:var(--muted)}
+.guide td:first-child{font-weight:700}
+.guide p{margin:0; font-size:13px; color:var(--muted)}
+.tbl{overflow-x:auto}
+
+/* rodapé */
+footer{background:var(--band); color:var(--band-ink)}
+footer .wrap{display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:16px 32px; padding-block:32px}
+footer p{margin:0; color:var(--band-muted)}
+footer .f-info{display:grid; gap:4px; justify-items:end; text-align:right}
+footer .f-info a{color:var(--band-ink); font-weight:600; text-decoration:none; white-space:nowrap}
+footer .f-info a:hover{color:var(--red-hi)}
+footer small{color:var(--band-muted); opacity:.8}
+footer .logo{font-size:26px}
+footer .logo .crest{height:34px}
+
+@media (max-width:1000px){ .grid{grid-template-columns:repeat(2, minmax(0,1fr)); gap:32px 20px} }
+@media (max-width:900px){
+  .pdp{gap:28px}
+  .gallery{grid-template-columns:minmax(0,1fr); position:static}
+  .buy{font-size:17px; letter-spacing:.04em; white-space:nowrap}
+  .nav-foto{opacity:1}
+  .thumbs{grid-auto-flow:column; grid-auto-columns:64px; order:2; overflow-x:auto}
+}
+@media (max-width:680px){
+  .pdp{grid-template-columns:minmax(0,1fr); gap:24px}
+  .top nav{display:none}
+  footer .f-info{justify-items:start; text-align:left}
+}
+@media (max-width:460px){
+  .grid{gap:28px 12px} .card h3{font-size:15px} .card .cta{display:none}
+  .card .team{white-space:normal}
+  .zap-top span{display:none} .zap-top{width:40px; padding:0; justify-content:center}
+  .logo{font-size:30px} .logo .crest{height:38px}
+  .bar .chips{flex-wrap:nowrap; overflow-x:auto; width:100%; padding-bottom:4px; scrollbar-width:none}
+  .chip{flex:none}
+  .buy{font-size:17px; letter-spacing:.04em; white-space:nowrap}
+  .guide th{font-size:12px; letter-spacing:.03em}
+}
+@media (prefers-reduced-motion:reduce){ *{transition:none!important; scroll-behavior:auto!important} }
+html{-webkit-text-size-adjust:100%}
+body{margin:0}
+img{max-width:100%}
+[hidden]{display:none!important}
+:root{padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px)}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <a class="logo" href="#" aria-label="Drib — início"><img class="crest" src="img/logo-drib.png" alt="" width="173" height="192">DRIB</a>
+    <div class="top-right">
+      <nav class="lbl" aria-label="Categorias">
+        <a href="#" data-go="brasileiros">Brasileiros</a>
+        <a href="#" data-go="europeus">Europeus</a>
+        <a href="#" data-go="selecoes">Seleções</a>
+      </nav>
+      <a class="zap-top lbl" id="zap-top" href="#" target="_blank" rel="noopener" aria-label="Falar com a Drib no WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.4.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6a2.7 2.7 0 0 0 1.8-1.2 2.2 2.2 0 0 0 .1-1.3c0-.1-.2-.2-.4-.3Z"/></svg><span>WhatsApp</span></a>
+    </div>
+  </div>
+</header>
+
+<main id="app"></main>
+
+<footer>
+  <div class="wrap">
+    <a class="logo" href="#" aria-label="Drib — início"><img class="crest" src="img/logo-drib.png" alt="" width="173" height="192">DRIB</a>
+    <div class="f-info">
+      <p>Pedidos e dúvidas pelo WhatsApp: <a id="zap-num" href="#" target="_blank" rel="noopener"></a></p>
+      <small>© <span id="ano"></span> Drib · Camisas de time</small>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ============================================================
+   CONFIGURAÇÃO DA LOJA — edite aqui
+   ============================================================ */
+const LOJA = {
+  nome: "Drib",
+  // Número com DDI + DDD, só dígitos. Ex.: 5579999999999
+  whatsapp: "5579991390037",
+};
+
+/* Produtos.
+   - fotos: lista de caminhos das imagens (ex.: "img/flamengo-1-frente.jpg").
+     Enquanto estiver vazia, o site mostra uma ilustração no lugar.
+   - preco: número (ex.: 249.9) ou null para mostrar "Consulte o valor".
+   - tamanhos: os tamanhos disponíveis. Os daqui são de exemplo.
+   - versoes: use quando a mesma camisa tem modelo masculino e feminino.
+   - esgotados: tamanhos que acabaram (ex.: ["P", "GG"]). Aparecem riscados e não podem ser escolhidos. */
+const PRODUTOS = [
+  {
+    id: "flamengo-1-2026",
+    time: "Flamengo",
+    nome: "Camisa Flamengo – 1º Uniforme 2026",
+    categoria: "brasileiros",
+    temporada: "2026",
+    preco: 150,
+    selo: "Lançamento",
+    descricao: "O manto rubro-negro da temporada 2026. Camisa do uniforme principal, nas listras vermelhas e pretas que todo flamenguista reconhece de longe.",
+    versoes: [{ nome: "Masculina", tamanhos: ["P", "M", "G", "GG"], tabela: "masc", esgotados: ["P", "G", "GG"] }],
+    fotos: [1, 2, 3, 4, 5].map(n => `img/flamengo-1-2026-${n}.jpg`),
+    arte: { padrao: "listras", cores: ["#c8102e", "#141414"], gola: "#141414" }
+  },
+  {
+    id: "flamengo-2-2026",
+    time: "Flamengo",
+    nome: "Camisa Flamengo – 2º Uniforme 2026",
+    categoria: "brasileiros",
+    temporada: "2026",
+    preco: 150,
+    selo: "Lançamento",
+    descricao: "O uniforme reserva do Mengão para 2026. Camisa branca com a faixa vermelha e preta no peito e punhos nas cores do clube, para quem quer vestir o Flamengo fora do óbvio.",
+    versoes: [{ nome: "Masculina", tamanhos: ["P", "M", "G", "GG"], tabela: "masc", esgotados: ["P"] }],
+    fotos: [1, 2, 3, 4].map(n => `img/flamengo-2-2026-${n}.jpg`),
+    arte: { padrao: "liso", cores: ["#f2f0ee", "#c8102e"], gola: "#141414" }
+  },
+  {
+    id: "chelsea-total90-2526",
+    time: "Chelsea",
+    nome: "Camisa Chelsea – Total 90 III 2025/26",
+    categoria: "europeus",
+    temporada: "2025/26",
+    preco: 130,
+    selo: null,
+    descricao: "Terceiro uniforme do Chelsea para a temporada 2025/26, da linha Total 90. Camisa preta com frisos em azul, gola branca e escudo retrô no peito. Para quem acompanha a Premier League e gosta de peça diferente no armário.",
+    versoes: [{ nome: "Masculina", tamanhos: ["P", "M", "G", "GG"], tabela: "masc", esgotados: ["P", "G", "GG"] }],
+    fotos: [1, 2, 3].map(n => `img/chelsea-total90-2526-${n}.jpg`),
+    arte: { padrao: "faixa", cores: ["#111214", "#2443d6"], gola: "#ffffff" }
+  },
+  {
+    id: "brasil-1-masculina",
+    time: "Seleção Brasileira",
+    nome: "Camisa Seleção Brasileira – 1º Uniforme Masculina",
+    categoria: "selecoes",
+    temporada: "Atual",
+    preco: 120,
+    selo: null,
+    descricao: "A amarelinha. Uniforme principal da Seleção no modelo masculino, amarela com gola e punhos em verde-escuro e recortes laterais em verde-água.",
+    versoes: [{ nome: "Masculina", tamanhos: ["P", "M", "G", "GG"], tabela: "masc", esgotados: [] }],
+    fotos: [0, 1, 2, 3, 4, 5].map(n => `img/brasil-1-${n}.jpg`),
+    arte: { padrao: "liso", cores: ["#f7d417", "#0f8a3c"], gola: "#0f8a3c" }
+  },
+  {
+    id: "brasil-1-feminina",
+    time: "Seleção Brasileira",
+    nome: "Camisa Seleção Brasileira – 1º Uniforme Feminina",
+    categoria: "selecoes",
+    temporada: "Atual",
+    preco: 120,
+    selo: null,
+    descricao: "A amarelinha. Uniforme principal da Seleção no modelo feminino, com modelagem mais ajustada ao corpo. Amarela com gola e punhos em verde-escuro e recortes laterais em verde-água.",
+    versoes: [{ nome: "Feminina", tamanhos: ["P", "M", "G", "GG"], tabela: "fem", esgotados: [] }],
+    fotos: [1, 2, 3, 4, 5, 6].map(n => `img/brasil-fem-${n}.jpg`),
+    arte: { padrao: "liso", cores: ["#f7d417", "#0f8a3c"], gola: "#0f8a3c" }
+  }
+];
+
+/* Tabela de medidas de referência (em cm). Ajuste com as medidas do seu fornecedor. */
+const MEDIDAS = {
+  masc: { titulo: "Masculina", linhas: [["P", "50–52", "69–71"], ["M", "52–54", "71–73"], ["G", "54–56", "73–75"], ["GG / XL", "56–58", "75–78"], ["2XL / XGG", "58–60", "78–80"]] },
+  fem:  { titulo: "Feminina",  linhas: [["P", 42, 62], ["M", 45, 64], ["G", 48, 66], ["GG", 51, 68]] }
+};
+
+const CATEGORIAS = [
+  ["todos", "Todas"], ["brasileiros", "Brasileiros"], ["europeus", "Europeus"], ["selecoes", "Seleções"]
+];
+
+/* ============================================================
+   A partir daqui é o funcionamento do site
+   ============================================================ */
+const app = document.getElementById("app");
+const ICONE_ZAP = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.4.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6a2.7 2.7 0 0 0 1.8-1.2 2.2 2.2 0 0 0 .1-1.3c0-.1-.2-.2-.4-.3Z"/></svg>';
+const SETA = d => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="${d}"/></svg>`;
+const zapLink = msg => `https://wa.me/${LOJA.whatsapp}?text=${encodeURIComponent(msg)}`;
+const TITULO = document.title;
+let filtro = "todos";
+const escolha = {}; // por produto: { versao, tamanho, foto }
+
+const fmtPreco = p => p == null
+  ? '<span class="price ask">Consulte o valor</span>'
+  : '<span class="price">' + p.toLocaleString("pt-BR", { style: "currency", currency: "BRL" }) + '</span>';
+
+const esgotado = v => v.tamanhos.every(t => (v.esgotados || []).includes(t));
+const produtoEsgotado = p => p.versoes.every(esgotado);
+
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+
+/* Ilustração usada enquanto não há fotos reais */
+function arte(p, vista) {
+  const [c1, c2] = p.arte.cores, gola = p.arte.gola, id = p.id + "-" + vista;
+  const corpo = "M62 30 L86 20 Q100 34 114 20 L138 30 L176 58 L160 92 L142 82 L142 214 L58 214 L58 82 L40 92 L24 58 Z";
+  let fill = "";
+  if (p.arte.padrao === "listras") {
+    for (let y = 14; y < 220; y += 24) fill += `<rect x="0" y="${y}" width="200" height="12" fill="${c2}"/>`;
+  } else if (p.arte.padrao === "faixa") {
+    fill = `<rect x="0" y="104" width="200" height="16" fill="${c2}"/>`;
+  } else {
+    fill = `<rect x="24" y="58" width="16" height="34" fill="${c2}" transform="rotate(-28 32 75)"/><rect x="160" y="58" width="16" height="34" fill="${c2}" transform="rotate(28 168 75)"/>`;
+  }
+  const zoom = vista === "detalhe" ? 'viewBox="60 20 80 100"' : 'viewBox="0 0 200 240"';
+  const costas = vista === "costas"
+    ? `<text x="100" y="140" text-anchor="middle" font-family="Big Shoulders Display, Impact, sans-serif" font-weight="900" font-size="58" fill="${c2 === c1 ? gola : (p.arte.padrao === "listras" ? "#ffffff" : c2)}" opacity=".92">10</text>`
+    : "";
+  const gol = vista === "costas"
+    ? `<path d="M86 20 Q100 28 114 20" fill="none" stroke="${gola}" stroke-width="5"/>`
+    : `<path d="M86 20 Q100 40 114 20" fill="none" stroke="${gola}" stroke-width="5"/>`;
+  return `<svg ${zoom} preserveAspectRatio="xMidYMid meet" role="img" aria-label="Ilustração: ${esc(p.nome)}">
+    <defs><clipPath id="c-${id}"><path d="${corpo}"/></clipPath></defs>
+    <g clip-path="url(#c-${id})"><rect width="200" height="240" fill="${c1}"/>${fill}</g>
+    <path d="${corpo}" fill="none" stroke="rgba(0,0,0,.18)" stroke-width="1.5"/>
+    ${gol}${costas}
+  </svg>`;
+}
+
+function midias(p, prioridade) {
+  if (p.fotos && p.fotos.length) return p.fotos.map((src, i) => ({ src, html: `<img src="${esc(src)}" alt="${esc(p.nome)} – foto ${i + 1}" width="1000" height="1000" decoding="async" ${prioridade && i === 0 ? 'fetchpriority="high"' : 'loading="lazy"'}>`, real: true }));
+  return ["frente", "costas", "detalhe"].map(v => ({ html: arte(p, v), real: false }));
+}
+
+/* ---------- Catálogo ---------- */
+function catalogo() {
+  const lista = PRODUTOS.filter(p => filtro === "todos" || p.categoria === filtro);
+  app.innerHTML = `
+    <section class="hero"><div class="wrap">
+      <span class="lbl kicker">Camisas de time</span>
+      <h1>Veste o <em>teu</em> time.</h1>
+      <p>Escolha a camisa, o tamanho e fale direto com a gente no WhatsApp. A gente confirma a disponibilidade e fecha o pedido com você.</p>
+      <div class="steps lbl">
+        <span><b>1</b>Escolha a camisa</span>
+        <span><b>2</b>Selecione o tamanho</span>
+        <span><b>3</b>Chame no WhatsApp</span>
+      </div>
+    </div></section>
+    <section class="wrap" id="catalogo">
+      <div class="bar">
+        <h2>Catálogo</h2>
+        <div class="chips lbl" role="group" aria-label="Filtrar por categoria">
+          ${CATEGORIAS.map(([k, n]) => `<button class="chip" data-f="${k}" aria-pressed="${filtro === k}">${n}</button>`).join("")}
+        </div>
+      </div>
+      <div class="grid">
+        ${lista.map((p, n) => `
+          <a class="card${produtoEsgotado(p) ? " sold" : ""}" href="#${p.id}">
+            <div class="ph">${midias(p, n < 3)[0].html}${produtoEsgotado(p) ? '<span class="tag off lbl">Esgotado</span>' : (p.selo ? `<span class="tag lbl">${esc(p.selo)}</span>` : "")}</div>
+            <div class="meta">
+              <span class="team lbl">${esc(p.time)} · ${esc(p.temporada)}</span>
+              <h3>${esc(p.nome)}</h3>
+              ${fmtPreco(p.preco)}
+              <span class="cta lbl">Ver tamanhos ${SETA("M5 12h14M13 6l6 6-6 6")}</span>
+            </div>
+          </a>`).join("")}
+      </div>
+    </section>`;
+  app.querySelectorAll("[data-f]").forEach(b => b.addEventListener("click", () => { filtro = b.dataset.f; catalogo(); app.querySelector(`[data-f="${filtro}"]`).focus(); marcarNav(); }));
+  document.title = TITULO;
+  marcarNav();
+}
+
+function marcarNav() {
+  document.querySelectorAll("[data-go]").forEach(a => a.setAttribute("aria-current", String(!location.hash.slice(1) && a.dataset.go === filtro)));
+}
+
+/* ---------- Página do produto ---------- */
+function linkZap(p, e) {
+  const versao = p.versoes.length > 1 ? ` (modelo ${p.versoes[e.versao].nome.toLowerCase()})` : "";
+  const msg = `Olá, ${LOJA.nome}! Tenho interesse na *${p.nome}*${versao}, tamanho *${e.tamanho}*. Está disponível?`;
+  return { url: zapLink(msg), msg };
+}
+
+function produto(p, foco) {
+  const e = escolha[p.id] || (escolha[p.id] = { versao: 0, tamanho: null, foto: 0, guia: false });
+  const fotos = midias(p, true);
+  if (e.foto >= fotos.length) e.foto = 0;
+  const v = p.versoes[e.versao];
+  const fora = v.esgotados || [];
+  if (e.tamanho && (!v.tamanhos.includes(e.tamanho) || fora.includes(e.tamanho))) e.tamanho = null;
+  const semEstoque = esgotado(v);
+  const zap = e.tamanho ? linkZap(p, e) : null;
+  const tab = MEDIDAS[v.tabela];
+
+  app.innerHTML = `
+    <div class="wrap">
+      <div class="crumbs lbl"><a href="#">Catálogo</a> / ${esc(p.time)}</div>
+      <div class="pdp">
+        <div class="gallery">
+          <div class="thumbs" role="group" aria-label="Fotos do produto">
+            ${fotos.map((f, i) => `<button data-foto="${i}" aria-current="${i === e.foto}" aria-label="Ver foto ${i + 1} de ${fotos.length}">${f.html.replace(/fetchpriority="high"/, 'loading="lazy"')}</button>`).join("")}
+          </div>
+          <div class="main-ph" id="main-ph">
+            <div id="main-img">${fotos[e.foto].html}</div>
+            ${fotos[e.foto].real ? "" : '<span class="note">Ilustração · foto real em breve</span>'}
+            ${fotos.length > 1 ? `
+            <button class="nav-foto prev" data-passo="-1" aria-label="Foto anterior">${SETA("M15 18l-6-6 6-6")}</button>
+            <button class="nav-foto next" data-passo="1" aria-label="Próxima foto">${SETA("M9 18l6-6-6-6")}</button>
+            <span class="count" id="count" aria-live="polite">${e.foto + 1} / ${fotos.length}</span>` : ""}
+          </div>
+        </div>
+
+        <div class="info">
+          <div class="head">
+            <span class="lbl kicker">${esc(p.time)} · ${esc(p.temporada)}</span>
+            <h1>${esc(p.nome)}</h1>
+            ${fmtPreco(p.preco)}
+          </div>
+          <p class="desc">${esc(p.descricao)}</p>
+
+          ${p.versoes.length > 1 ? `
+          <div class="opt">
+            <span class="lbl">Modelo</span>
+            <div class="versions" role="group" aria-label="Modelo">
+              ${p.versoes.map((x, i) => `<button class="size wide" data-v="${i}" aria-pressed="${i === e.versao}">${esc(x.nome)}</button>`).join("")}
+            </div>
+          </div>` : ""}
+
+          <div class="opt">
+            <div class="opt-head">
+              <span class="lbl">Tamanho${e.tamanho ? ": " + e.tamanho : ""}</span>
+              <button class="linkbtn" id="toggle-guia" aria-expanded="${e.guia}" aria-controls="guia">${e.guia ? "Fechar tabela de medidas" : "Tabela de medidas"}</button>
+            </div>
+            <div class="sizes" role="group" aria-label="Tamanho">
+              ${v.tamanhos.map(t => fora.includes(t)
+                ? `<button class="size out" disabled aria-label="${t}, indisponível" title="Indisponível">${t}</button>`
+                : `<button class="size" data-t="${t}" aria-pressed="${t === e.tamanho}">${t}</button>`).join("")}
+            </div>
+            ${e.guia ? `
+            <div class="guide" id="guia">
+              <span class="lbl">Medidas · ${tab.titulo}</span>
+              <div class="tbl"><table>
+                <thead><tr><th>Tamanho</th><th>Largura · peito (cm)</th><th>Altura · comprimento (cm)</th></tr></thead>
+                <tbody>${tab.linhas.map(r => `<tr><td>${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td></tr>`).join("")}</tbody>
+              </table></div>
+              <p>Largura medida de axila a axila, com a camisa esticada. Medidas aproximadas.</p>
+            </div>` : ""}
+          </div>
+
+          <a class="buy" id="buy" ${zap ? `href="${zap.url}" target="_blank" rel="noopener"` : 'aria-disabled="true" role="link"'}>
+            ${ICONE_ZAP}
+            ${zap ? "Comprar pelo WhatsApp" : (semEstoque ? "Esgotado" : "Escolha um tamanho")}
+          </a>
+          ${zap
+            ? `<div class="preview"><b>Mensagem que será enviada</b>${esc(zap.msg).replace(/\*/g, "")}</div>`
+            : `<p class="hint">${semEstoque ? "Todos os tamanhos deste modelo esgotaram. Chame a gente no WhatsApp para saber da reposição." : "Selecione o tamanho para liberar o botão de compra." + (fora.length ? " Tamanhos riscados estão indisponíveis." : "")}</p>`}
+
+          <ul class="trust">
+            <li>${SETA("M20 6L9 17l-5-5")}Atendimento direto com a Drib pelo WhatsApp</li>
+            <li>${SETA("M20 6L9 17l-5-5")}A gente confirma o tamanho e a disponibilidade antes de fechar o pedido</li>
+          </ul>
+
+          <dl class="specs">
+            <dt>Time</dt><dd>${esc(p.time)}</dd>
+            <dt>Temporada</dt><dd>${esc(p.temporada)}</dd>
+            <dt>${p.versoes.length > 1 ? "Modelos" : "Modelo"}</dt><dd>${p.versoes.map(x => esc(x.nome)).join(" e ")}</dd>
+            <dt>Disponíveis</dt><dd>${v.tamanhos.filter(t => !fora.includes(t)).join(", ") || "Nenhum no momento"}</dd>
+          </dl>
+        </div>
+      </div>
+    </div>`;
+
+  /* Troca de foto sem redesenhar a página */
+  const irPara = i => {
+    e.foto = (i + fotos.length) % fotos.length;
+    document.getElementById("main-img").innerHTML = fotos[e.foto].html.replace('loading="lazy"', "");
+    app.querySelectorAll("[data-foto]").forEach(b => b.setAttribute("aria-current", String(+b.dataset.foto === e.foto)));
+    const c = document.getElementById("count"); if (c) c.textContent = `${e.foto + 1} / ${fotos.length}`;
+  };
+  app.querySelectorAll("[data-foto]").forEach(b => b.addEventListener("click", () => irPara(+b.dataset.foto)));
+  app.querySelectorAll("[data-passo]").forEach(b => b.addEventListener("click", () => irPara(e.foto + +b.dataset.passo)));
+  const mp = document.getElementById("main-ph"); let x0 = null;
+  mp.addEventListener("touchstart", ev => { x0 = ev.touches[0].clientX; }, { passive: true });
+  mp.addEventListener("touchend", ev => {
+    if (x0 === null || fotos.length < 2) return;
+    const dx = ev.changedTouches[0].clientX - x0; x0 = null;
+    if (Math.abs(dx) > 40) irPara(e.foto + (dx < 0 ? 1 : -1));
+  });
+
+  /* Opções: redesenha e devolve o foco para o mesmo controle */
+  app.querySelectorAll("[data-v]").forEach(b => b.addEventListener("click", () => { e.versao = +b.dataset.v; produto(p, `[data-v="${b.dataset.v}"]`); }));
+  app.querySelectorAll("[data-t]").forEach(b => b.addEventListener("click", () => { e.tamanho = b.dataset.t; produto(p, `[data-t="${b.dataset.t}"]`); }));
+  document.getElementById("toggle-guia").addEventListener("click", () => { e.guia = !e.guia; produto(p, "#toggle-guia"); });
+  if (foco) app.querySelector(foco)?.focus({ preventScroll: true });
+  document.title = `${p.nome} | Drib`;
+  marcarNav();
+}
+
+/* ---------- Navegação ---------- */
+function rota() {
+  const id = location.hash.replace("#", "");
+  const p = PRODUTOS.find(x => x.id === id);
+  p ? produto(p) : catalogo();
+  window.scrollTo(0, 0);
+}
+function irCatalogo(f) {
+  filtro = f;
+  if (location.hash) history.pushState(null, "", location.pathname + location.search);
+  catalogo();
+}
+document.querySelectorAll("[data-go]").forEach(a => a.addEventListener("click", ev => {
+  ev.preventDefault(); irCatalogo(a.dataset.go);
+  document.getElementById("catalogo")?.scrollIntoView({ behavior: "smooth" });
+}));
+document.querySelectorAll(".logo").forEach(a => a.addEventListener("click", ev => {
+  ev.preventDefault(); irCatalogo("todos"); window.scrollTo({ top: 0 });
+}));
+const zapNum = document.getElementById("zap-num");
+zapNum.textContent = LOJA.whatsapp.replace(/^55(\d{2})(\d{5})(\d{4})$/, "($1) $2-$3");
+zapNum.href = zapLink(`Olá, ${LOJA.nome}! Vim pelo site e queria tirar uma dúvida.`);
+document.getElementById("zap-top").href = zapNum.href;
+document.getElementById("ano").textContent = new Date().getFullYear();
+window.addEventListener("hashchange", rota);
+rota();
+</script>
+</body>
+</html>
